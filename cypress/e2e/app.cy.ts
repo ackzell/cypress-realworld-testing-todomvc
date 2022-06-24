@@ -24,11 +24,7 @@ describe("React TodoMVC", () => {
   })
 
   it("adds three todos", () => {
-    cy.get(".new-todo")
-      .type(`${TODO_ITEM_ONE}{enter}`)
-      .type(`${TODO_ITEM_TWO}{enter}`)
-      .type(`${TODO_ITEM_THREE}{enter}`)
-
+    cy.createDefaultTodos()
     cy.get(".todo-list li").should("have.length", 3)
   })
 })
