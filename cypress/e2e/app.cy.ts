@@ -9,7 +9,7 @@ describe("React TodoMVC", () => {
     cy.visit("http://localhost:8888")
   })
 
-  it("adds a single todo", () => {
+  it("should add a single todo", () => {
     //* You can chain the `type()` calls and prevent `get()`ting the same element more than once
     cy.get(".new-todo").type(`${TODO_ITEM_ONE}{enter}`)
 
@@ -23,8 +23,38 @@ describe("React TodoMVC", () => {
       .should("contain", TODO_ITEM_ONE)
   })
 
-  it("adds three todos", () => {
+  it("should add three todos", () => {
     cy.createDefaultTodos()
     cy.get(".todo-list li").should("have.length", 3)
+  })
+
+  it("should append new items to the bottom of the list", () => {
+    cy.createDefaultTodos()
+
+    // Todo 1
+    cy.get(".todo-list li").eq(0).find("label").should("contain", TODO_ITEM_ONE)
+
+    // Todo 2
+    cy.get(".todo-list li").eq(1).find("label").should("contain", TODO_ITEM_TWO)
+
+    // Todo 3
+    cy.get(".todo-list li")
+      .eq(2)
+      .find("label")
+      .should("contain", TODO_ITEM_THREE)
+
+    //* a "more realistic" approach to asserting we have the expected result
+    // this is the bottom left label that shows up in the app itself
+
+    //* From learn.cypress.io:
+    /**
+     * You will notice that our .todo-count is a <span> with multiple elements nested
+     * inside of it. The number is wrapped in a <strong> tag,
+     * and the words are wrapped in <span> tags.
+     *
+     * The cy.contains() method will find the appropriate text
+     * even though it may be nested in several different tags.
+     */
+    cy.get(".todo-count").contains("3 items left")
   })
 })
