@@ -14,7 +14,13 @@ describe("React TodoMVC", () => {
     cy.get(".new-todo").type(`${TODO_ITEM_ONE}{enter}`)
 
     //* assertion
-    cy.get(".todo-list li").should("have.length", 1)
+    cy.get(".todo-list li")
+      //grab the first item in the resulting array
+      .eq(0)
+      // find a DOM element within that node
+      .find("label")
+      // assert
+      .should("contain", TODO_ITEM_ONE)
   })
 
   it("adds three todos", () => {
