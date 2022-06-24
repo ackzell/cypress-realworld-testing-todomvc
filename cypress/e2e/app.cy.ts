@@ -23,7 +23,8 @@ describe("React TodoMVC", () => {
       .should("contain", TODO_ITEM_ONE)
   })
 
-  it("should add three todos", () => {
+  //* it.only() focuses on just this one test
+  it.only("should add three todos", () => {
     cy.createDefaultTodos()
     cy.get(".todo-list li").should("have.length", 3)
   })
