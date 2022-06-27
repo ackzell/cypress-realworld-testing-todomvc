@@ -23,8 +23,7 @@ describe("React TodoMVC", () => {
       .should("contain", TODO_ITEM_ONE)
   })
 
-  //* it.only() focuses on just this one test
-  it.only("should add three todos", () => {
+  it("should add three todos", () => {
     cy.createDefaultTodos().as("todos")
     cy.get("@todos").should("have.length", 3)
   })
@@ -54,5 +53,11 @@ describe("React TodoMVC", () => {
      * even though it may be nested in several different tags.
      */
     cy.get(".todo-count").contains("3 items left")
+  })
+
+  //* it.only() focuses on just this one test
+  it.only("does NOT display the footer or todo-list when there are no todos", () => {
+    cy.get(".footer").should("not.exist")
+    cy.get(".todo-list").should("not.exist")
   })
 })
