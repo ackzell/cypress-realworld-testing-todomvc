@@ -24,6 +24,8 @@ Cypress.Commands.add("createDefaultTodos", () => {
     .type(`${TODO_ITEM_THREE}{enter}`, { log: false })
 
   cy.get(".todo-list li", { log: false }).then((listItems) => {
+    //* snapshot is literally a DOM snapshot you can see when
+    //* running the test as the output of "createDefaultTodos" test body
     cmd.set({ el: listItems }).snapshot().end()
   })
 })

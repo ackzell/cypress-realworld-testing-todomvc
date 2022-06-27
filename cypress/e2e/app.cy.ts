@@ -30,19 +30,16 @@ describe("React TodoMVC", () => {
   })
 
   it("should append new items to the bottom of the list", () => {
-    cy.createDefaultTodos()
+    cy.createDefaultTodos().as("todos")
 
     // Todo 1
-    cy.get(".todo-list li").eq(0).find("label").should("contain", TODO_ITEM_ONE)
+    cy.get("@todos").eq(0).find("label").should("contain", TODO_ITEM_ONE)
 
     // Todo 2
-    cy.get(".todo-list li").eq(1).find("label").should("contain", TODO_ITEM_TWO)
+    cy.get("@todos").eq(1).find("label").should("contain", TODO_ITEM_TWO)
 
     // Todo 3
-    cy.get(".todo-list li")
-      .eq(2)
-      .find("label")
-      .should("contain", TODO_ITEM_THREE)
+    cy.get("@todos").eq(2).find("label").should("contain", TODO_ITEM_THREE)
 
     //* a "more realistic" approach to asserting we have the expected result
     // this is the bottom left label that shows up in the app itself
